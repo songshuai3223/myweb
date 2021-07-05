@@ -1,5 +1,6 @@
 package com.cn.my.app.starter;
 
+import com.cn.my.log.starter.LogUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 import org.springframework.boot.SpringApplication;
@@ -30,7 +31,7 @@ public class MywebAppListenner implements SpringApplicationRunListener, Ordered 
 
     @Override
     public void starting() {
-//        MDC.put(LogUtils.LOG_ID, LogUtils.logId());
+        MDC.put(LogUtils.LOG_ID, LogUtils.logId());
         log.warn("======================= starting =====================================");
     }
 

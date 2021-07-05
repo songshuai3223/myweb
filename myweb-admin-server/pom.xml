@@ -21,6 +21,11 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.4.3</version>
         </dependency>
+        <dependency>
+            <groupId>com.cn.my</groupId>
+            <artifactId>myweb-app-starter</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>
