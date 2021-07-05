@@ -1,0 +1,136 @@
+package ${package.ServiceImpl};
+
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import ${package.Entity}.${entity};
+import ${package.Service}.${table.serviceName};
+import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+import java.util.ArrayList;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+/**
+ * <p>
+ * $!{table.comment} 服务实现类
+ * @since ${date}
+ * </p>
+ *
+ * @author ${author}
+ */
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes={XXX.class})// 指定启动类
+public class ${table.serviceImplName}{
+    @Autowired
+    private I${entity}Service ${table.entityPath}Service;
+
+    /***
+     * 测试根据主键查询${entity}
+     * @return
+     */
+    @Test
+    public void testGet${entity}(){
+        ${entity} ${table.entityPath} = new ${entity}();
+        ${entity} ${table.entityPath}Result = ${table.entityPath}Service.get${entity}(${table.entityPath});
+    }
+
+    /***
+     * 测试根据实体参数查询${entity}
+     * @return
+     */
+    @Test
+    public void testGet${entity}list(){
+        ${entity} ${table.entityPath} = new ${entity}();
+        List<${entity}> ${table.entityPath}ListResult = ${table.entityPath}Service.get${entity}list(${table.entityPath});
+    }
+    /***
+     * 测试根据实体参数查询分页${entity}列表
+     * @return
+     */
+    @Test
+    public void testGet${entity}Pagelist(){
+        ${entity} ${table.entityPath} = new ${entity}();
+        IPage<${entity}> ${table.entityPath}Page = new Page<${entity}>();
+        IPage<${entity}> ${entity}PageResult = ${table.entityPath}Service.get${entity}Pagelist(${table.entityPath}Page , ${table.entityPath});
+
+    }
+
+    /***
+     * 测试根据条件查询总数
+     * @return
+     */
+    @Test
+    public void testCount${entity}(){
+        ${entity} ${table.entityPath} = new ${entity}();
+        int count = ${table.entityPath}Service.count${entity}(${table.entityPath});
+    }
+
+    /***
+     * 测试插入${entity}
+     * @return
+     */
+    @Test
+    public void testSave${entity}(){
+        ${entity} ${table.entityPath} = new ${entity}();
+        int saveResult = ${table.entityPath}Service.save${entity}(${table.entityPath});
+    }
+
+    /***
+     * 测试修改${entity}
+     * @return
+     */
+    @Test
+    public void testUpdate${entity}(){
+        ${entity} ${table.entityPath} = new ${entity}();
+        int updateResult = ${table.entityPath}Service.update${entity}(${table.entityPath});
+    }
+
+    /***
+     * 测试删除${entity}
+     * @return
+     */
+    @Test
+    public void testRemove${entity}(){
+        ${entity} ${table.entityPath} = new ${entity}();
+        int updateResult = ${table.entityPath}Service.remove${entity}(${table.entityPath});
+    }
+
+    /***
+     * 测试批量插入${entity}
+     * @return
+     */
+    @Test
+    public void testBatchSave${entity}(){
+        List<${entity}> ${table.entityPath}List = new ArrayList();
+        for(int i=0;i<5;i++){
+            ${entity} ${table.entityPath} = new ${entity}();
+            ${table.entityPath}List.add(${table.entityPath});
+        }
+        boolean batchSaveResult = ${table.entityPath}Service.batchSave${entity}(${table.entityPath}List);
+    }
+
+    /***
+     * 测试批量修改${entity}
+     * @return
+     */
+    @Test
+    public void testBatchUpdate${entity}(){
+        List<${entity}> ${table.entityPath}List = new ArrayList();
+        for(int i=0;i<5;i++){
+            ${entity} ${table.entityPath} = new ${entity}();
+            ${table.entityPath}List.add(${table.entityPath});
+        }
+        boolean batchSaveResult = ${table.entityPath}Service.batchUpdate${entity}(${table.entityPath}List);
+    }
+
+    /***
+     * 测试批量删除${entity}md
+     * @return
+     */
+     @Test
+     public void testBatchRemove${entity}(){
+        ${entity} ${table.entityPath} = new ${entity}();
+        int updateResult = ${table.entityPath}Service.remove${entity}(${table.entityPath});
+    }
+}

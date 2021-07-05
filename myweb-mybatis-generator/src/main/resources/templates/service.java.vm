@@ -1,0 +1,102 @@
+package ${package.Service};
+
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import ${package.Entity}.${entity};
+import ${superServiceClassPackage};
+import java.util.List;
+
+/**
+ * <p>
+ * $!{table.comment} 服务类
+ * @since ${date}
+ * </p>
+ *
+ * @author ${author}
+ */
+public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
+    /***
+     * 根据主键查询${entity}
+     * @param ${table.entityPath}
+     * @return
+     */
+    ${entity} get${entity}(${entity} ${table.entityPath});
+
+    /***
+     * 根据实体参数查询${entity}列表
+     * @param ${table.entityPath}
+     * @return
+     */
+    List<${entity}> get${entity}list(${entity} ${table.entityPath});
+
+    /***
+     * 根据实体参数查询分页${entity}分页列表
+     * @param ${table.entityPath}
+     * @param ${table.entityPath}Page
+     * @return
+     */
+    IPage<${entity}> get${entity}Pagelist(IPage<${entity}> ${table.entityPath}Page, ${entity} ${table.entityPath});
+
+    /***
+     * 根据实体参数模糊查询${entity}列表
+     * @param ${table.entityPath}
+     * @return
+     */
+    List<${entity}> get${entity}LikeList(${entity} ${table.entityPath});
+
+
+    /***
+     * 根据实体参数查询分页${entity}分页列表
+     * @param ${table.entityPath}
+     * @param ${table.entityPath}Page
+     * @return
+     */
+    IPage<${entity}> get${entity}LikePageList(IPage<${entity}> ${table.entityPath}Page, ${entity} ${table.entityPath});
+    /***
+     * 根据条件查询总数
+     * @param ${table.entityPath}
+     * @return
+     */
+    int count${entity}(${entity} ${table.entityPath});
+
+    /***
+     * 插入${entity}
+     * @param ${table.entityPath}
+     * @return
+     */
+    int save${entity}(${entity} ${table.entityPath});
+
+    /***
+     * 修改${entity}
+     * @param ${table.entityPath}
+     * @return
+     */
+    int update${entity}(${entity} ${table.entityPath});
+
+    /***
+     * 删除${entity}
+     * @param ${table.entityPath}
+     * @return
+     */
+    int remove${entity}(${entity} ${table.entityPath});
+
+    /***
+     * 批量插入${entity}
+     * @param ${table.entityPath}List
+     * @return
+     */
+    boolean batchSave${entity}(List<${entity}>  ${table.entityPath}List);
+
+    /***
+     * 批量修改${entity}
+     * @param ${table.entityPath}List
+     * @return
+     */
+    boolean batchUpdate${entity}(List<${entity}> ${table.entityPath}List);
+
+    /***
+     * 批量删除${entity}
+     * @param ${table.entityPath}
+     * @return
+     */
+    int batchRemove${entity}(${entity} ${table.entityPath});
+}

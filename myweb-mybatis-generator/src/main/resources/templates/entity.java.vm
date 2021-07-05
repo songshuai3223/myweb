@@ -1,0 +1,69 @@
+package ${package.Entity};
+
+#foreach($pkg in ${table.importPackages})
+import ${pkg};
+#end
+import com.baomidou.mybatisplus.annotation.TableId;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import com.baomidou.mybatisplus.annotation.TableField;
+
+#if(!${activeRecord} && !${superEntityClass})
+import java.io.Serializable;
+#end
+
+/**
+ * <p>
+ * ${table.comment}
+ * @since ${date}
+ * </p>
+ *
+ * @author ${author}
+ */
+@TableName("${table.name}")
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
+public class ${entity} {
+private static final long serialVersionUID=1L;
+
+
+#foreach($field in ${table.fields})
+    #if(${field.keyFlag})##生成主键排在第一位
+    #if("$!field.comment" != "")
+        /**
+         * ${field.comment}
+         */
+        @TableId
+        @TableField("${field.name}")
+        @ApiModelProperty(notes = "${field.comment}")
+        #end
+    private ${field.propertyType} ${field.propertyName};
+    #end
+#end
+#foreach($field in ${table.commonFields})##生成公共字段
+#if("$!field.comment" != "")
+    /**
+     * ${field.comment}
+     */
+    @TableId
+    @TableField("${field.name}")
+    @ApiModelProperty(notes = "${field.comment}")
+    #end
+    private ${field.propertyType} ${field.propertyName};
+#end
+#foreach($field in ${table.fields})
+    #if(!${field.keyFlag})##生成普通字段
+    #if("$!field.comment" != "")
+/**
+     * ${field.comment}
+     */
+    @TableField("${field.name}")
+    @ApiModelProperty(notes = "${field.comment}")
+        #end
+    private ${field.propertyType} ${field.propertyName};
+    #end
+#end
+}

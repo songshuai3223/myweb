@@ -1,0 +1,182 @@
+package ${package.ServiceImpl};
+
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import ${package.Entity}.${entity};
+import ${package.Mapper}.${table.mapperName};
+import ${package.Service}.${table.serviceName};
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import java.util.List;
+/**
+ * <p>
+ * $!{table.comment} 服务实现类
+ * @since ${date}
+ * </p>
+ *
+ * @author ${author}
+ */
+@Service
+public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}>implements ${table.serviceName} {
+    @Autowired
+    private ${entity}Mapper ${table.entityPath}Mapper;
+
+    /***
+     * 根据主键查询${entity}
+     * @param ${table.entityPath}
+     * @return
+     */
+    @Override
+    public ${entity} get${entity}(${entity} ${table.entityPath}){
+        QueryWrapper<${entity}> ${table.entityPath}QueryWrapper=new QueryWrapper<>(${table.entityPath});
+        return ${table.entityPath}Mapper.selectOne(${table.entityPath}QueryWrapper);
+    }
+
+    /***
+     * 根据实体参数查询${entity}
+     * @param ${table.entityPath}
+     * @return
+     */
+    @Override
+    public List<${entity}> get${entity}list(${entity} ${table.entityPath}){
+        QueryWrapper<${entity}> ${table.entityPath}QueryWrapper=new QueryWrapper<>(${table.entityPath});
+        return ${table.entityPath}Mapper.selectList(${table.entityPath}QueryWrapper);
+    }
+    /***
+     * 根据实体参数查询分页${entity}列表
+     * @param ${table.entityPath}
+     * @param ${table.entityPath}Page
+     * @return
+     */
+    @Override
+    public IPage<${entity}> get${entity}Pagelist(IPage<${entity}> ${table.entityPath}Page, ${entity} ${table.entityPath}){
+        QueryWrapper<${entity}> ${table.entityPath}QueryWrapper=new QueryWrapper<>(${table.entityPath});
+        return ${table.entityPath}Mapper.selectPage(${table.entityPath}Page,${table.entityPath}QueryWrapper);
+    }
+    /***
+    * 根据实体参数模糊查询${entity}
+    * @param ${table.entityPath}
+    * @return
+    */
+    @Override
+    public List<${entity}> get${entity}LikeList(${entity} ${table.entityPath}){
+        QueryWrapper<${entity}> ${table.entityPath}QueryWrapper=new QueryWrapper<>();
+
+    #foreach($field in ${table.fields})
+        #if(${field.keyFlag})##生成主键排在第一位
+            ${table.entityPath}QueryWrapper.like("${field.name}", StringUtils.isEmpty(${table.entityPath}.get$field.propertyName.substring(0,1).toUpperCase()$field.propertyName.substring(1,$field.propertyName.length())()))?"":${table.entityPath}.get$field.propertyName.substring(0,1).toUpperCase()$field.propertyName.substring(1,$field.propertyName.length())());
+        #end
+    #end
+    #foreach($field in ${table.commonFields})##生成公共字段
+        ${table.entityPath}QueryWrapper.like("${field.name}", StringUtils.isEmpty(${table.entityPath}.get$field.propertyName.substring(0,1).toUpperCase()$field.propertyName.substring(1,$field.propertyName.length())()))?"":${table.entityPath}.get$field.propertyName.substring(0,1).toUpperCase()$field.propertyName.substring(1,$field.propertyName.length())());
+    #end
+    #foreach($field in ${table.fields})
+        #if(!${field.keyFlag})##生成普通字段
+        ${table.entityPath}QueryWrapper.like("${field.name}", StringUtils.isEmpty(${table.entityPath}.get$field.propertyName.substring(0,1).toUpperCase()$field.propertyName.substring(1,$field.propertyName.length())()))?"":${table.entityPath}.get$field.propertyName.substring(0,1).toUpperCase()$field.propertyName.substring(1,$field.propertyName.length())());
+        #end
+    #end
+
+        return ${table.entityPath}Mapper.selectList(${table.entityPath}QueryWrapper);
+        }
+
+    /***
+     * 根据实体参数查询分页${entity}分页列表
+     * @param ${table.entityPath}
+     * @param ${table.entityPath}Page
+     * @return
+     */
+    @Override
+    public IPage<${entity}> get${entity}LikePageList(IPage<${entity}> ${table.entityPath}Page, ${entity} ${table.entityPath}){
+        QueryWrapper<${entity}> ${table.entityPath}QueryWrapper=new QueryWrapper<>();
+
+    #foreach($field in ${table.fields})
+        #if(${field.keyFlag})##生成主键排在第一位
+            ${table.entityPath}QueryWrapper.like("${field.name}", ${table.entityPath}.get$field.propertyName.substring(0,1).toUpperCase()$field.propertyName.substring(1,$field.propertyName.length())());
+        #end
+    #end
+    #foreach($field in ${table.commonFields})##生成公共字段
+        ${table.entityPath}QueryWrapper.like("${field.name}", ${table.entityPath}.get$field.propertyName.substring(0,1).toUpperCase()$field.propertyName.substring(1,$field.propertyName.length())());
+    #end
+    #foreach($field in ${table.fields})
+        #if(!${field.keyFlag})##生成普通字段
+            ${table.entityPath}QueryWrapper.like("${field.name}", ${table.entityPath}.get$field.propertyName.substring(0,1).toUpperCase()$field.propertyName.substring(1,$field.propertyName.length())());
+        #end
+    #end
+
+        return ${table.entityPath}Mapper.selectPage(${table.entityPath}Page,${table.entityPath}QueryWrapper);
+        }
+    /***
+     * 根据条件查询总数
+     * @param ${table.entityPath}
+     * @return
+     */
+    @Override
+    public int count${entity}(${entity} ${table.entityPath}){
+        QueryWrapper<${entity}> ${table.entityPath}QueryWrapper=new QueryWrapper<>(${table.entityPath});
+        return ${table.entityPath}Mapper.selectCount(${table.entityPath}QueryWrapper);
+    }
+
+    /***
+     * 插入${entity}
+     * @param ${table.entityPath}
+     * @return
+     */
+    @Override
+    public int save${entity}(${entity} ${table.entityPath}){
+        return ${table.entityPath}Mapper.insert(${table.entityPath});
+    }
+
+    /***
+     * 修改${entity}
+     * @param ${table.entityPath}
+     * @return
+     */
+    @Override
+    public int update${entity}(${entity} ${table.entityPath}){
+        return ${table.entityPath}Mapper.updateById(${table.entityPath});
+    }
+
+    /***
+     * 删除${entity}
+     * @param ${table.entityPath}
+     * @return
+     */
+    @Override
+    public int remove${entity}(${entity} ${table.entityPath}){
+        QueryWrapper<${entity}> ${table.entityPath}QueryWrapper=new QueryWrapper<>(${table.entityPath});
+        return ${table.entityPath}Mapper.delete(${table.entityPath}QueryWrapper);
+    }
+
+    /***
+     * 批量插入${entity}
+     * @param ${table.entityPath}List
+     * @return
+     */
+    @Override
+    public boolean batchSave${entity}(List<${entity}> ${table.entityPath}List){
+        return saveBatch(${table.entityPath}List);
+    }
+
+    /***
+     * 批量修改${entity}
+     * @param ${table.entityPath}List
+     * @return
+     */
+    @Override
+    public boolean batchUpdate${entity}(List<${entity}> ${table.entityPath}List){
+        return updateBatchById(${table.entityPath}List);
+    }
+
+    /***
+     * 批量删除${entity}md
+     * @param ${table.entityPath}
+     * @return
+     */
+    @Override
+     public int batchRemove${entity}(${entity} ${table.entityPath}){
+        QueryWrapper<${entity}> ${table.entityPath}QueryWrapper=new QueryWrapper<>(${table.entityPath});
+        return ${table.entityPath}Mapper.delete(${table.entityPath}QueryWrapper);
+    }
+}

@@ -10,6 +10,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>myweb-boot-starter</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>myweb-app-starter</module>
+        <module>myweb-log-starter</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

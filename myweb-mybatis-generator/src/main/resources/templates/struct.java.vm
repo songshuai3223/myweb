@@ -1,0 +1,46 @@
+package ${package.Mapper};
+
+import ${package.Entity}.${entity}DTO;
+import ${package.Entity}.${entity};
+import java.util.List;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
+import org.mapstruct.factory.Mappers;
+/**
+ * <p>
+ * $!{table.comment} Mapper 接口
+ * @since ${date}
+ * </p>
+ *
+ * @author ${author}
+ */
+
+@Mapper(componentModel="spring")
+public interface ${table.mapperName}{
+    ${table.mapperName} INSTANCE = Mappers.getMapper(${table.mapperName}.class);
+
+   #* @Mappings({
+
+            #foreach($field in ${table.fields})
+                #if(${field.keyFlag})##生成主键排在第一位
+            @Mapping(source = "${field.propertyName}", target = "${field.propertyName}"),
+                #end
+            #end
+            #foreach($field in ${table.commonFields})##生成公共字段
+            @Mapping(source = "${field.propertyName}", target = "${field.propertyName}"),
+            #end
+            #foreach($field in ${table.fields})
+                #if(!${field.keyFlag})##生成普通字段
+            @Mapping(source = "${field.propertyName}", target = "${field.propertyName}"),
+                #end
+            #end
+    })*#
+    ${entity}DTO domain2dto(${entity} ${table.entityPath});
+
+    List<${entity}DTO> domain2dtoList(List<${entity}> ${table.entityPath}List);
+
+    ${entity} dto2Tomain(${entity}DTO userDTO);
+
+    List<${entity}> dto2TomainList(List<${entity}DTO> ${table.entityPath}DTOList);
+}

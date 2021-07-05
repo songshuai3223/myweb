@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${package.Mapper}.${table.mapperName}">
+
+   #* <!-- 开启二级缓存 -->
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="${package.Entity}.${entity}">
+        #foreach($field in ${table.fields})
+            #if(${field.keyFlag})##生成主键排在第一位
+                <id column="${field.name}" property="${field.propertyName}"/>
+            #end
+        #end
+        #foreach($field in ${table.commonFields})##生成公共字段
+            <result column="${field.name}" property="${field.propertyName}"/>
+        #end
+        #foreach($field in ${table.fields})
+            #if(!${field.keyFlag})##生成普通字段
+                <result column="${field.name}" property="${field.propertyName}"/>
+            #end
+        #end
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+      #foreach($field in ${table.commonFields})
+        ${field.name},#end ${table.fieldNames}
+    </sql>
+
+    <!--通用查询条件-->
+    <sql id="Base_Query_Cond">
+        <where>
+            #foreach($field in ${table.fields})
+                #if(${field.keyFlag})##生成主键排在第一位
+                    and ${field.name} = #{${field.propertyName}}
+                #end
+            #end
+            #foreach($field in ${table.commonFields})##生成公共字段
+                and ${field.name} = #{${field.propertyName}}
+            #end
+            #foreach($field in ${table.fields})
+                #if(!${field.keyFlag})##生成普通字段
+                    and ${field.name} = #{${field.propertyName}}
+                #end
+            #end
+        </where>
+    </sql>
+
+    <select id="get${entity}" resultType="${package.Entity}.${entity}">
+        select
+        <include refid="Base_Column_List"/>
+        from ${table.name}
+        <include refid="Base_Query_Cond"/>
+    </select>
+
+    <select id="get${entity}list" resultType="${package.Entity}.${entity}">
+        select
+        <include refid="Base_Column_List"/>
+        from ${table.name}
+        <include refid="Base_Query_Cond"/>
+    </select>
+
+    <select id="count${entity}" resultType="${package.Entity}.${entity}">
+        select count(1)
+        from ${table.name}
+        <include refid="Base_Query_Cond"/>
+    </select>
+
+    <insert id="save${entity}" parameterType="${package.Entity}.${entity}">
+        insert into ${table.name}(
+        #foreach($field in ${table.fields})
+            #if(${field.keyFlag})##生成主键排在第一位
+            <if test="${field.propertyName}!=null and ${field.propertyName}!=''">
+                ${field.name},
+            </if>
+            #end
+        #end
+        #foreach($field in ${table.commonFields})##生成公共字段
+            <if test="${field.propertyName}!=null and ${field.propertyName}!=''">
+                ${field.name},
+            </if>
+        #end
+        #foreach($field in ${table.fields})
+            #if(!${field.keyFlag})##生成普通字段
+            <if test="${field.propertyName}!=null and ${field.propertyName}!=''">
+                ${field.name}#if($foreach.hasNext),#end
+            </if>
+            #end
+        #end
+        )
+        values
+        (
+        #foreach($field in ${table.fields})
+            #if(${field.keyFlag})##生成主键排在第一位
+            <if test="${field.propertyName}!=null and ${field.propertyName}!=''">
+                #{${field.propertyName}},
+            </if>
+            #end
+        #end
+        #foreach($field in ${table.commonFields})##生成公共字段
+            <if test="${field.propertyName}!=null and ${field.propertyName}!=''">
+                #{${field.propertyName}},
+            </if>
+        #end
+        #foreach($field in ${table.fields})
+            #if(!${field.keyFlag})##生成普通字段
+            <if test="${field.propertyName}!=null and ${field.propertyName}!=''">
+                #{${field.propertyName}}#if($foreach.hasNext),#end
+            </if>
+            #end
+        #end
+        )
+    </insert>
+
+
+    <update id="update${entity}" parameterType="${package.Entity}.${entity}">
+        update ${table.name} set
+        #foreach($field in ${table.fields})
+            #if(${field.keyFlag})##生成主键排在第一位
+            <if test="${field.propertyName}!=null and ${field.propertyName}!=''">
+                ${field.name}= #{${field.propertyName}},
+            </if>
+            #end
+        #end
+        #foreach($field in ${table.commonFields})##生成公共字段
+            <if test="${field.propertyName}!=null and ${field.propertyName}!=''">
+                ${field.name}= #{${field.propertyName}},
+            </if>
+        #end
+        #foreach($field in ${table.fields})
+            #if(!${field.keyFlag})##生成普通字段
+            <if test="${field.propertyName}!=null and ${field.propertyName}!=''">
+                ${field.name}= #{${field.propertyName}}#if($foreach.hasNext),#end
+            </if>
+            #end
+        #end
+
+        <include refid="Base_Query_Cond"/>
+    </update>
+
+    <delete id="delete${entity}" parameterType="${package.Entity}.${entity}">
+        delete from ${table.name}
+        <include refid="Base_Query_Cond"/>
+    </delete>
+
+    <insert id="batchSave${entity}" parameterType="java.util.List">
+        insert into ${tableName}
+        (
+        #foreach($field in ${table.fields})
+            #if(${field.keyFlag})##生成主键排在第一位
+            <if test="${field.propertyName}!=null and ${field.propertyName}!=''">
+                ${field.name},
+            </if>
+            #end
+        #end
+        #foreach($field in ${table.commonFields})##生成公共字段
+            <if test="${field.propertyName}!=null and ${field.propertyName}!=''">
+                ${field.name},
+            </if>
+        #end
+        #foreach($field in ${table.fields})
+            #if(!${field.keyFlag})##生成普通字段
+            <if test="${field.propertyName}!=null and ${field.propertyName}!=''">
+                ${field.name}#if($foreach.hasNext),#end
+            </if>
+            #end
+        #end
+        )
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+
+                #foreach($field in ${table.fields})
+                    #if(${field.keyFlag})##生成主键排在第一位
+            <if test="${field.propertyName}!=null and ${field.propertyName}!=''">
+                #{item.${field.propertyName}},
+            </if>
+                    #end
+                #end
+                #foreach($field in ${table.commonFields})##生成公共字段
+            <if test="${field.propertyName}!=null and ${field.propertyName}!=''">
+                #{item.${field.propertyName}},
+            </if>
+                #end
+                #foreach($field in ${table.fields})
+                    #if(!${field.keyFlag})##生成普通字段
+            <if test="${field.propertyName}!=null and ${field.propertyName}!=''">
+                #{item.${field.propertyName}}#if($foreach.hasNext),#end##
+            </if>
+                    #end
+                #end
+            )
+        </foreach>
+    </insert>
+
+    <!--通用查询条件-->
+    <sql id="Batch_Base_Query_Cond">
+        <where>
+            #foreach($field in ${table.fields})
+                #if(${field.keyFlag})##生成主键排在第一位
+            <if test="${field.propertyName}!=null and ${field.propertyName}!=''">
+              and ${field.name} = #{item.${field.propertyName}},####
+            </if>
+                #end
+            #end
+            #foreach($field in ${table.commonFields})##生成公共字段
+            <if test="${field.propertyName}!=null and ${field.propertyName}!=''">
+                and ${field.name} = #{item.${field.propertyName}},##
+            </if>
+            #end
+            #foreach($field in ${table.fields})
+                #if(!${field.keyFlag})##生成普通字段
+            <if test="${field.propertyName}!=null and ${field.propertyName}!=''">
+               and ${field.name} = #{item.${field.propertyName}}#if($foreach.hasNext),#end ##
+            </if>
+                #end
+            #end
+        </where>
+    </sql>
+
+    <update id="batchUpdate${entity}" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update ${table.name}
+            <set>
+                #foreach($field in ${table.fields})
+                    #if(${field.keyFlag})##生成主键排在第一位
+            <if test="${field.propertyName}!=null and ${field.propertyName}!=''">
+                ${field.name}= #{item.${field.propertyName}},
+            </if>
+                    #end
+                #end
+                #foreach($field in ${table.commonFields})##生成公共字段
+            <if test="${field.propertyName}!=null and ${field.propertyName}!=''">
+                ${field.name}= #{item.${field.propertyName}},
+            </if>
+                #end
+                #foreach($field in ${table.fields})
+                    #if(!${field.keyFlag})##生成普通字段
+            <if test="${field.propertyName}!=null and ${field.propertyName}!=''">
+                ${field.name}= #{item.${field.propertyName}}#if($foreach.hasNext),#end ##
+            </if>
+                    #end
+                #end
+            </set>
+            <include refid="Batch_Base_Query_Cond"/>
+        </foreach>
+    </update>
+
+    <delete id="batchRemove${entity}">
+        delete from ${table.name}
+        <include refid="Batch_Base_Query_Cond"/>
+    </delete>*#
+</mapper>

@@ -1,0 +1,20 @@
+package ${package.Mapper};
+
+import org.apache.ibatis.annotations.Mapper;
+
+import ${package.Entity}.${entity};
+import ${superMapperClassPackage};
+import java.util.List;
+/**
+ * <p>
+ * $!{table.comment} Mapper 接口
+ * @since ${date}
+ * </p>
+ *
+ * @author ${author}
+ */
+
+@Mapper
+public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
+
+}

@@ -1,0 +1,187 @@
+package ${package.Controller};
+
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import ${package.Entity}.${entity};
+import ${package.Service}.${table.serviceName};
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RestController;
+import io.swagger.annotations.Api;
+import java.util.List;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+/**
+ * <p>
+ * $!{table.comment} 前端控制器
+ * @since ${date}
+ * </p>
+ *
+ * @author ${author}
+ */
+@Api(tags = {"/${table.entityPath}"}, description = "${table.comment}相关接口")
+@RestController
+@RequestMapping(value = "${table.entityPath}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Validated
+public class ${table.controllerName} {
+
+    @Autowired
+    private I${entity}Service ${table.entityPath}Service;
+
+    /***
+     * 根据主键查询${entity}
+     * @param ${table.entityPath}
+     * @return
+     */
+    @PostMapping("/get")
+    @ResponseBody
+    @ApiOperation(value="根据主键查询${entity}", notes="根据主键查询${entity}")
+    @ApiImplicitParam(paramType="query", name = "${table.entityPath}", value = "${table.comment}", required = true, dataType = "${entity}")
+    public ${entity} get${entity}(@RequestBody ${entity} ${table.entityPath}){
+       return ${table.entityPath}Service.get${entity}(${table.entityPath});
+    }
+
+    /***
+     * 根据实体参数查询${entity}列表
+     * @param ${table.entityPath}
+     * @return
+     */
+    @PostMapping("/getlist")
+    @ResponseBody
+    @ApiOperation(value="根据实体参数查询${entity}列表", notes="根据实体参数查询${entity}列表")
+    @ApiImplicitParam(paramType="query", name = "${table.entityPath}", value = "${table.comment}", required = true, dataType = "${entity}")
+    public List<${entity}> get${entity}list(@RequestBody ${entity} ${table.entityPath}){
+        return ${table.entityPath}Service.get${entity}list(${table.entityPath});
+    }
+
+    /***
+     * 根据实体参数查询${entity}分页列表
+     * @param  ${table.entityPath}
+     * @return
+     */
+    @PostMapping("/getlist/page")
+    @ResponseBody
+    @ApiOperation(value="根据实体参数查询${entity}分页列表", notes="根据实体参数查询${entity}分页列表")
+    @ApiImplicitParam(paramType="query", name = "user", value = "用户信息", required = true, dataType = "User")
+    public IPage<${entity}> get${entity}Pagelist(@RequestBody IPage<${entity}> ${table.entityPath}Page, @RequestBody ${entity} ${table.entityPath}){
+        return ${table.entityPath}Service.get${entity}Pagelist(${table.entityPath}Page,${table.entityPath});
+    }
+
+    /***
+     * 根据实体参数查询${entity}列表
+     * @param ${table.entityPath}
+     * @return
+     */
+    @PostMapping("/getlist/like")
+    @ResponseBody
+    @ApiOperation(value="根据实体参数模糊查询${entity}列表", notes="根据实体参数模糊查询${entity}列表")
+    @ApiImplicitParam(paramType="query", name = "${table.entityPath}", value = "${table.comment}", required = true, dataType = "${entity}")
+    public List<${entity}> get${entity}LikeList(@RequestBody ${entity} ${table.entityPath}){
+        return ${table.entityPath}Service.get${entity}LikeList(${table.entityPath});
+    }
+
+    /***
+     * 根据实体参数查询${entity}分页列表
+     * @param ${table.entityPath}
+     * @return
+     */
+    @PostMapping("/getlist/like/page")
+    @ResponseBody
+    @ApiOperation(value="根据实体参数模糊查询${entity}分页列表", notes="根据实体参数模糊查询${entity}分页列表")
+    @ApiImplicitParam(paramType="query", name = "${table.entityPath}", value = "${table.comment}", required = true, dataType = "${entity}")
+    public IPage<${entity}> get${entity}LikePageList(@RequestBody IPage<${entity}> ${table.entityPath}Page, @RequestBody ${entity} ${table.entityPath}){
+        return ${table.entityPath}Service.get${entity}LikePageList(${table.entityPath}Page,${table.entityPath});
+    }
+
+    /***
+     * 根据条件查询总数
+     * @param ${table.entityPath}
+     * @return
+     */
+    @PostMapping("/count")
+    @ResponseBody
+    @ApiOperation(value="根据条件查询总数", notes="根据条件查询总数")
+    @ApiImplicitParam(paramType="query", name = "${table.entityPath}", value = "${table.comment}", required = true, dataType = "${entity}")
+    public int count${entity}(@RequestBody ${entity} ${table.entityPath}){
+        return ${table.entityPath}Service.count${entity}(${table.entityPath});
+    }
+
+    /***
+     * 插入${entity}
+     * @param ${table.entityPath}
+     * @return
+     */
+    @PostMapping("/save")
+    @ResponseBody
+    @ApiOperation(value="插入${entity}", notes="插入${entity}")
+    @ApiImplicitParam(paramType="data", name = "${table.entityPath}", value = "${table.comment}", required = true, dataType = "${entity}")
+    public int save${entity}(@RequestBody ${entity} ${table.entityPath}){
+        return ${table.entityPath}Service.save${entity}(${table.entityPath});
+    }
+
+    /***
+     * 修改${entity}
+     * @param ${table.entityPath}
+     * @return
+     */
+    @PostMapping("/update")
+    @ResponseBody
+    @ApiOperation(value="修改${entity}", notes="修改${entity}")
+    @ApiImplicitParam(paramType="data", name = "${table.entityPath}", value = "${table.comment}", required = true, dataType = "${entity}")
+    public int update${entity}(@RequestBody ${entity} ${table.entityPath}){
+        return ${table.entityPath}Service.update${entity}(${table.entityPath});
+    }
+
+    /***
+     * 删除${entity}
+     * @param ${table.entityPath}
+     * @return
+     */
+    @PostMapping("/delete")
+    @ResponseBody
+    @ApiOperation(value="删除${entity}", notes="删除${entity}")
+    @ApiImplicitParam(paramType="data", name = "${table.entityPath}", value = "${table.comment}", required = true, dataType = "${entity}")
+    public int remove${entity}(@RequestBody ${entity} ${table.entityPath}){
+        return ${table.entityPath}Service.remove${entity}(${table.entityPath});
+    }
+
+    /***
+     * 批量插入${entity}
+     * @param ${table.entityPath}List
+     * @return
+     */
+    @PostMapping("/batch/save")
+    @ResponseBody
+    @ApiOperation(value="批量插入${entity}", notes="批量插入${entity}")
+    @ApiImplicitParam(paramType="data", name = "${table.entityPath}List", value = "${table.comment}", required = true, dataType = "List<${entity}>")
+    public boolean batchSave${entity}(@RequestBody List<${entity}> ${table.entityPath}List){
+        return ${table.entityPath}Service.saveBatch(${table.entityPath}List);
+    }
+
+    /***
+     * 批量修改${entity}
+     * @param ${table.entityPath}List
+     * @return
+     */
+    @PostMapping("/batch/update")
+    @ResponseBody
+    @ApiOperation(value="批量修改${entity}", notes="批量修改${entity}")
+    @ApiImplicitParam(paramType="data", name = "${table.entityPath}List", value = "${table.comment}", required = true, dataType = "List<${entity}>")
+    public boolean batchUpdate${entity}(@RequestBody List<${entity}> ${table.entityPath}List){
+        return ${table.entityPath}Service.batchUpdate${entity}(${table.entityPath}List);
+    }
+
+    /***
+     * 批量删除${entity}
+     * @param ${table.entityPath}
+     * @return
+     */
+    @PostMapping("/batch/delete")
+    @ResponseBody
+    @ApiOperation(value="批量删除删除${entity}", notes="批量删除删除${entity}")
+    @ApiImplicitParam(paramType="data", name = "${table.entityPath}", value = "${table.comment}", required = true, dataType = "${entity}")
+    public int batchRemove${entity}(@RequestBody ${entity} ${table.entityPath}){
+        return ${table.entityPath}Service.batchRemove${entity}(${table.entityPath});
+    }
+}
