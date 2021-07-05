@@ -13,8 +13,7 @@
 
     <properties>
         <spring.cloud.version>Hoxton.SR9</spring.cloud.version>
-        <beetl.version>3.3.7-RELEASE</beetl.version>
-        <spring.boot.version>2.3.7.RELEASE</spring.boot.version>
+        <spring.boot.version>2.3.9.RELEASE</spring.boot.version>
         <graalvm.version>20.3.0</graalvm.version>
     </properties>
 
@@ -57,22 +56,11 @@
                 <version>${graalvm.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.ibeetl</groupId>
-                <artifactId>sql-springboot-starter</artifactId>
-                <version>${beetl.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring.boot.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>com.ibeetl</groupId>
-                <artifactId>beetlsql</artifactId>
-                <version>${beetl.version}</version>
-                <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
