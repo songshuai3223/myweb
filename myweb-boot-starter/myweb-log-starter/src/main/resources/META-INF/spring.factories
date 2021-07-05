@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
- com.d3.dpd.cloud.app.D3LogAutoConfiguration
+ com.cn.my.log.starter.D3LogAutoConfiguration

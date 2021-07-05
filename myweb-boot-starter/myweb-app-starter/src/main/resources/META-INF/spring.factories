@@ -1,2 +1,2 @@
 org.springframework.boot.SpringApplicationRunListener=\
-  com.d3.dpd.cloud.app.D3AppListenner
+  com.cn.my.app.starter.MywebAppListenner
