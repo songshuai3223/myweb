@@ -14,6 +14,8 @@
     <modules>
         <module>myweb-app-starter</module>
         <module>myweb-log-starter</module>
+        <module>myweb-apidoc-starter</module>
+        <module>myweb-swagger-starter</module>
     </modules>
 
     <properties>
