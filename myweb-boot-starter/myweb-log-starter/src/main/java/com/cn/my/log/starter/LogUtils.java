@@ -3,7 +3,7 @@ package com.cn.my.log.starter;
 import java.util.UUID;
 
 /**
- * @author Bryan Wang
+ * @author songshuai
  * @date 2020/1/17-17:51
  * @Description
  */

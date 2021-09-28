@@ -10,7 +10,7 @@ import org.springframework.core.Ordered;
 import org.springframework.core.env.ConfigurableEnvironment;
 
 /**
- * @author Bryan Wang
+ * @author songshuai
  * @date 2020/1/17-15:27
  * @Description 应用生命周期回调
  */

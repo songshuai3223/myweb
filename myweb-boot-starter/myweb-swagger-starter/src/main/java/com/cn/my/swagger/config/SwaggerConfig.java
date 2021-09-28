@@ -1,13 +1,11 @@
 package com.cn.my.swagger.config;
 
-import com.google.common.base.Predicates;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -31,20 +29,20 @@ import java.util.List;
 @Component
 @Configuration
 @EnableSwagger2
-public class SwaggerConfig extends WebMvcConfigurerAdapter  {
+public class SwaggerConfig extends WebMvcConfigurerAdapter {
 
-	@Bean
-	public Docket createRestApi() {
-		ParameterBuilder tokenPar = new ParameterBuilder();
-		List<Parameter> pars = new ArrayList<>();
-		tokenPar.name("dpd-portal-token").description("令牌").
-		modelRef(new ModelRef("string")).
-		parameterType("cookie").required(false).build();
+    @Bean
+    public Docket createRestApi() {
+        ParameterBuilder tokenPar = new ParameterBuilder();
+        List<Parameter> pars = new ArrayList<>();
+        tokenPar.name("dpd-portal-token").description("令牌").
+                modelRef(new ModelRef("string")).
+                parameterType("cookie").required(false).build();
 
-		pars.add(tokenPar.build());
+        pars.add(tokenPar.build());
 
-		return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select()
-				// .apis(RequestHandlerSelectors.basePackage("com.digitalgd.dpd"))
+        return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select()
+                // .apis(RequestHandlerSelectors.basePackage("com.digitalgd.dpd"))
 //				.apis(RequestHandlerSelectors.any())
 //				.paths( input ->PathSelectors.regex("/catalog.*").apply(input)||
 //						PathSelectors.regex("/cata*.*").apply(input)
@@ -54,44 +52,43 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter  {
 //				)
 //				.apis(Predicates.or(RequestHandlerSelectors.basePackage("com.digitalgd.dpd.sys.controller"),
 //						            RequestHandlerSelectors.basePackage("com.digitalgd.dpd.statis.controller")))
-				.apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
-                 .paths(PathSelectors.any())
-				.build().globalOperationParameters(pars);
-	}
+                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
+                .paths(PathSelectors.any())
+                .build().globalOperationParameters(pars);
+    }
 
-	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("API接口文档").description("API接口文档说明").version("1.0").build();
-	}
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder().title("API接口文档").description("API接口文档说明").version("1.0").build();
+    }
 
-	@Bean
-	public ViewResolver viewResolver() {
-		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		resolver.setViewClass(JstlView.class);
-		resolver.setPrefix("/");
-		resolver.setSuffix(".html");
-		return resolver;
+    @Bean
+    public ViewResolver viewResolver() {
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setViewClass(JstlView.class);
+        resolver.setPrefix("/");
+        resolver.setSuffix(".html");
+        return resolver;
 
-	}
+    }
 
-	@Bean
-	public MessageSource messageSource() {
-		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-		messageSource.setBasename("messages");
-		return messageSource;
-	}
+    @Bean
+    public MessageSource messageSource() {
+        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+        messageSource.setBasename("messages");
+        return messageSource;
+    }
 
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		super.addResourceHandlers(registry);
-		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
-		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
-	}
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        super.addResourceHandlers(registry);
+        registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+    }
 
-	@Override
-	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-		configurer.enable();
-	}
-
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
+    }
 
 
 }

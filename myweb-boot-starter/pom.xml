@@ -16,6 +16,8 @@
         <module>myweb-log-starter</module>
         <module>myweb-apidoc-starter</module>
         <module>myweb-swagger-starter</module>
+        <module>myweb-security-starter</module>
+        <module>myweb-common-starter</module>
     </modules>
 
     <properties>

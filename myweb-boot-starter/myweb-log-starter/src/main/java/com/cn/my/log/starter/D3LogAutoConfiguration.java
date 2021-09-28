@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 
 /**
- * @author Bryan Wang
+ * @author songshuai
  * @date 2020/1/10-19:54
  * @Description
  */

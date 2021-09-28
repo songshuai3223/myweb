@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.List;
 
 /**
- * @author Bryan Wang
+ * @author songshuai
  * @date 2020/1/10-21:51
  * @Description
  */

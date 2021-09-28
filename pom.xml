@@ -8,6 +8,7 @@
         <module>myweb-admin-api</module>
         <module>myweb-admin-server</module>
         <module>myweb-boot-starter</module>
+
     </modules>
     <groupId>com.cn.my</groupId>
     <artifactId>myweb</artifactId>

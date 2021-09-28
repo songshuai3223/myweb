@@ -11,7 +11,7 @@ import static com.cn.my.log.starter.LogUtils.LOG_ID;
 
 
 /**
- * @author Bryan Wang
+ * @author songshuai
  * @date 2020/1/10-19:24
  * @Description 过滤所有web请求，在其中加入日志通用部分
  */
