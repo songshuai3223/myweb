@@ -4,7 +4,7 @@ import com.cn.my.security.starter.dto.RestResponse;
 import com.cn.my.security.starter.module.ImageCode;
 import com.cn.my.security.starter.resp.UserResp;
 import com.cn.my.security.starter.service.IUserService;
-import com.cn.my.util.VerifyCodeUtils;
+import com.cn.my.security.starter.util.VerifyCodeUtils;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,7 +25,7 @@ import java.util.Base64;
  */
 @Api(tags = {"登录响应"}, value = "/v1/login", produces = "application/json")
 @RestController
-@RequestMapping("/v1/login")
+@RequestMapping("/login")
 public class LoginController {
 
     public static final String SESSION_KEY = "SESSION_KEY_IMAGE_CODE";
