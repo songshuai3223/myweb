@@ -1,9 +1,9 @@
 package com.cn.my.security.starter.mapper;
 
 
-
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cn.my.security.starter.module.Role;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -14,6 +14,7 @@ import java.util.List;
  * @date 2021/4/25-11:35
  * @Description
  */
+@Mapper
 public interface RoleMapper extends BaseMapper<Role> {
 
     /**

@@ -27,54 +27,54 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private IUserService dspUserService;
+    private IUserService userService;
 
     @ApiOperation("用户管理列表")
     @GetMapping("/list")
     public RestResponse<Page<UserResp>> findList(@RequestParam(value = "pageNum", defaultValue = "1") @ApiParam(value = "分页页码，默认为1") Integer pageNum,
                                                  @RequestParam(value = "pageSize", defaultValue = "10") @ApiParam(value = "分页大小，默认为10") Integer pageSize,
                                                  String param) {
-        return RestResponse.successGet(dspUserService.findList(param, pageNum, pageSize));
+        return RestResponse.successGet(userService.findList(param, pageNum, pageSize));
     }
 
     @ApiOperation("用户详情")
     @GetMapping("/info/{userId}")
     public RestResponse<UserResp> info(@PathVariable @Validated Long userId) {
-        return RestResponse.successGet(dspUserService.findUserById(userId));
+        return RestResponse.successGet(userService.findUserById(userId));
     }
 
     @ApiOperation("新增用户")
     @PostMapping("/_add")
     public RestResponse addUser(@RequestBody @Validated UserReq req) {
-        dspUserService.addUser(req);
+        userService.addUser(req);
         return RestResponse.successPut();
     }
 
     @ApiOperation("编辑用户")
     @PostMapping("/_edit")
     public RestResponse editUser(@RequestBody @Validated UserReq req) {
-        dspUserService.editUser(req);
+        userService.editUser(req);
         return RestResponse.successPut();
     }
 
     @ApiOperation("重置用户密码")
     @PostMapping("/_reset")
     public RestResponse resetUserPwd(@RequestBody @Validated User req) {
-        dspUserService.resetUserPwd(req);
+        userService.resetUserPwd(req);
         return RestResponse.successPut();
     }
 
     @ApiOperation("删除用户")
     @PostMapping("/_del/{userId}")
     public RestResponse delUser(@PathVariable @Validated Long userId) {
-        dspUserService.delUser(userId);
+        userService.delUser(userId);
         return RestResponse.successPut();
     }
 
     @ApiOperation("角色列表")
     @GetMapping("/role/list")
     public RestResponse<List<Role>> findRoleList(String param) {
-        return RestResponse.successGet(dspUserService.findRoleList(param));
+        return RestResponse.successGet(userService.findRoleList(param));
     }
 
 }

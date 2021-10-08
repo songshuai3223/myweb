@@ -1,5 +1,6 @@
 package com.cn.my.security.starter.module;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -70,8 +71,10 @@ public class User implements UserDetails {
      */
     private LocalDateTime updateTime;
 
+    @TableField(exist = false)
     private List<Role> dspRoleList;
 
+    @TableField(exist = false)
     private Set<GrantedAuthority> authorities;
 
     @Override

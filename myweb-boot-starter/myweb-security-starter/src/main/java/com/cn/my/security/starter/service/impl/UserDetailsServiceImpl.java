@@ -23,19 +23,19 @@ import java.util.stream.Collectors;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private IUserService dspUserService;
+    private IUserService userService;
 
     /**
      * 授权的时候是对角色授权
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User dspUser = dspUserService.getUserByMobile(username);
+        User dspUser = userService.getUserByMobile(username);
         if (null == dspUser) {
             throw new UsernameNotFoundException(username);
         }
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        List<Role> dspRoleList = dspUserService.getRoleByUsername(dspUser.getId());
+        List<Role> dspRoleList = userService.getRoleByUsername(dspUser.getId());
         for (Role dspRole : dspRoleList) {
             authorities.add(new SimpleGrantedAuthority(dspRole.getRoleCode()));
         }

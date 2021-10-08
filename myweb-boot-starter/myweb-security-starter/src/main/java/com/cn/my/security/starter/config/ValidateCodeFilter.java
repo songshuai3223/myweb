@@ -53,15 +53,15 @@ public class ValidateCodeFilter extends OncePerRequestFilter {
                 LoginRequest body = JsonUtil.getObjectMapper().readValue(aa, LoginRequest.class);
                 // 验证码验证
                 ImageCode codeInSession = (ImageCode) request.getSession().getAttribute(LoginController.SESSION_KEY);
-                String codeInRequest = body.getImageCode();
-                if (!StringUtils.hasText(codeInRequest) || codeInSession == null) {
-                    ApiAssert.failure(HttpStatus.BAD_REQUEST, "验证码不能为空!");
-                } else if (codeInSession.isExpried()) {
-                    request.getSession().removeAttribute(LoginController.SESSION_KEY);
-                    ApiAssert.failure(HttpStatus.BAD_REQUEST, "验证码已过期!");
-                } else if (!codeInSession.getCode().equals(codeInRequest)) {
-                    ApiAssert.failure(HttpStatus.BAD_REQUEST, "验证码错误!");
-                }
+//                String codeInRequest = body.getImageCode();
+//                if (!StringUtils.hasText(codeInRequest) || codeInSession == null) {
+//                    ApiAssert.failure(HttpStatus.BAD_REQUEST, "验证码不能为空!");
+//                } else if (codeInSession.isExpried()) {
+//                    request.getSession().removeAttribute(LoginController.SESSION_KEY);
+//                    ApiAssert.failure(HttpStatus.BAD_REQUEST, "验证码已过期!");
+//                } else if (!codeInSession.getCode().equals(codeInRequest)) {
+//                    ApiAssert.failure(HttpStatus.BAD_REQUEST, "验证码错误!");
+//                }
                 request.getSession().removeAttribute(LoginController.SESSION_KEY);
             } catch (Exception e) {
                 log.error(e.getLocalizedMessage(), e);

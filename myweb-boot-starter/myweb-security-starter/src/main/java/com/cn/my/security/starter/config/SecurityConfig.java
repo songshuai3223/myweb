@@ -47,18 +47,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         //  允许所有用户访问"/"和"/index.html"
         http.userDetailsService(userDetailsService).authorizeRequests()
-                .antMatchers("/v1/login/**", "/", "/index.html", "/v2/api-docs", "/swagger-resources/configuration/ui",
+                .antMatchers("/login/**", "/", "/index.html", "/v2/api-docs", "/swagger-resources/configuration/ui",
                         "/swagger-resources", "/swagger-resources/configuration/security",
                         "/swagger-ui.html", "/webjars/**").permitAll()
                 .anyRequest().authenticated()
                 .and().apply(customRestfulLoginDsl)
-                .and().formLogin().successForwardUrl("/v1/login/success")
+                .and().formLogin().successForwardUrl("/login/success")
                 .failureHandler((request, response, exception) -> sendFailureResponse(response, "账户或密码错误！"))
                 .and().exceptionHandling()
                 .authenticationEntryPoint((request, response, authException) -> sendFailureResponse(response, "认证失败！"))
                 .and()
                 .logout()
-                .logoutSuccessUrl("/v1/login/logout/success")
+                .logoutSuccessUrl("/login/logout/success")
                 .invalidateHttpSession(true);
 
     }

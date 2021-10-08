@@ -23,7 +23,7 @@ import java.util.Base64;
 /**
  * @author songshuai
  */
-@Api(tags = {"登录响应"}, value = "/v1/login", produces = "application/json")
+@Api(tags = {"登录响应"}, value = "/login", produces = "application/json")
 @RestController
 @RequestMapping("/login")
 public class LoginController {

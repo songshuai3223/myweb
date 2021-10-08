@@ -326,4 +326,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>  implements I
                 .like(Role::getRoleCode, param).eq(Role::getStatus, CommonStatusEnum.NORMAL.getValue());
         return roleMapper.selectList(roleQueryWrapper);
     }
+
+    public static void main(String[] args) {
+        BCryptPasswordEncoder bcryptPasswordEncoder = new BCryptPasswordEncoder();
+        String password = bcryptPasswordEncoder.encode("123456");
+        System.out.println(password);
+    }
 }
